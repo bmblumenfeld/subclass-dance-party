@@ -1,7 +1,7 @@
 describe('blinkyDancer', function() {
 
   var blinkyDancer, clock;
-  var timeBetweenSteps = 100 ;
+  var timeBetweenSteps = 100;
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
@@ -31,4 +31,28 @@ describe('blinkyDancer', function() {
       expect(blinkyDancer.step.callCount).to.be.equal(2);
     });
   });
+  describe('push to window array', function () {
+    it('should correctly add dancers to window array', function () {
+      window.dancers = [];
+      var blinkyDancer = new makeBlinkyDancer(10, 20, timeBetweenSteps);
+      var blinkyDancer2 = new makeBlinkyDancer(10, 20, timeBetweenSteps);
+      window.dancers.push(blinkyDancer);
+      window.dancers.push(blinkyDancer2);
+      expect(window.dancers.length).to.be.equal(2);
+    });
+  });
+  describe('Line Up', function () {
+    it('Should correctly line up', function () {
+      window.dancers = [];
+      var blinkyDancer = new makeBlinkyDancer(10, 20, timeBetweenSteps);
+      var blinkyDancer2 = new makeBlinkyDancer(10, 20, timeBetweenSteps);
+      window.dancers.push(blinkyDancer);
+      window.dancers.push(blinkyDancer2);
+      for (var i = 0; i < window.dancers.length; i++) {
+        window.dancers[i].setPosition(1, 2);
+      }
+      expect($(window.dancers[0].$node[0]).css('top')).to.be.equal(1 + 'px');    
+    });
+  });
+
 });
