@@ -1,5 +1,9 @@
 var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
   makeDancer.apply(this, arguments);
+  this.$node = $('<span>' + '<img src="https://media.giphy.com/media/YSvS7nxbfTZTy/giphy.gif" class = "dancer">' + '</span>');
+  this.$node.addClass('dancer');
+  
+  this.setPosition(top, left);
 };
 makeBlinkyDancer.prototype = Object.create(makeDancer.prototype);
 makeBlinkyDancer.prototype.constructor = makeBlinkyDancer;
